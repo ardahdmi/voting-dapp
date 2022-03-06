@@ -1,19 +1,28 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2018",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "declaration": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "smart-contract/scripts",
+    "smart-contract/tests",
+    "smart-contract/contracts",
+    "smart-contract/contracts/artifacts",
+    "./typechain"
+  ],
+  "files": ["hardhat.config.ts", "./hardhat.d.ts"],
   "exclude": ["node_modules"]
 }
