@@ -23,6 +23,6 @@
     "smart-contract/contracts/artifacts",
     "./typechain"
   ],
-  "files": ["hardhat.config.ts", "./hardhat.d.ts"],
+  "files": ["hardhat.config.ts"],
   "exclude": ["node_modules"]
 }
