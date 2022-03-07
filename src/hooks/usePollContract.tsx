@@ -3,11 +3,17 @@ declare const window: { ethereum: any };
 import { contractABI, contractAddress } from "../utils/constants";
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
-import { IAddUser } from "../domain/interfaces/PollContract.interface";
+import {
+  IAddQuiz,
+  IAddUser,
+  QuizStruct,
+  UserStruct,
+} from "../domain/interfaces/PollContract.interface";
 
 export const usePollContract = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [allUsers, setAllUsers] = useState([]);
+  const [allQuizes, setAllQuizes] = useState([]);
 
   const isWalletConnected = async () => {
     try {
@@ -18,8 +24,8 @@ export const usePollContract = () => {
         return;
       } else {
         console.log("We have the ethereum object", ethereum);
-        const users = await getAllUsers();
-        console.log(users);
+        await getAllUsers();
+        await getAllQuizes();
       }
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
@@ -63,8 +69,7 @@ export const usePollContract = () => {
 
         await addUserTxn.wait();
         console.log("Mined -- ", addUserTxn.hash);
-        const length = await getAllUsers();
-        console.log(length);
+        await getAllUsers();
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -81,7 +86,7 @@ export const usePollContract = () => {
         const pollContract = await getPollContract();
         await pollContract.deployed();
 
-        const users = await pollContract.getAllUsers();
+        const users: UserStruct[] = await pollContract.getAllUsers();
         console.log(users);
 
         const usersCleaned = users.map((user) => {
@@ -100,9 +105,67 @@ export const usePollContract = () => {
     }
   };
 
+  const addQuiz = async (props: IAddQuiz) => {
+    const { ethereum } = window;
+    const { title, questions, answers } = props;
+    try {
+      if (ethereum) {
+        const pollContract = await getPollContract(true);
+        await pollContract.deployed();
+
+        const addUserTxn = await pollContract.addQuiz(
+          title,
+          questions,
+          answers
+        );
+
+        await addUserTxn.wait();
+        await getAllQuizes();
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllQuizes = async () => {
+    const { ethereum } = window;
+
+    try {
+      if (ethereum) {
+        const pollContract = await getPollContract();
+        await pollContract.deployed();
+
+        const quizes: QuizStruct[] = await pollContract.getAllQuizes();
+        console.log(quizes);
+
+        const quizesCleaned = quizes.map((quiz) => {
+          return {
+            title: quiz.title,
+            questions: quiz.questions,
+            answers: quiz.answers,
+            isOpen: quiz.isOpen,
+          };
+        });
+        setAllQuizes(quizesCleaned);
+        return quizesCleaned;
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const changeUserRole = async () => {};
+  const vote = async () => {};
+  const endQuizWithResults = async () => {};
+
+  //todo sebebini anlamadim
   useEffect(() => {
     isWalletConnected();
   }, []);
 
-  return { addUser, allUsers, isWalletConnected };
+  return { addUser, allUsers, isWalletConnected, addQuiz, allQuizes };
 };

@@ -1,3 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;600;700&family=League+Spartan:wght@300;400;500;600&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+p,
+h1,
+h2,
+h3,
+span {
+  @apply font-spartan;
+}
+
+html,
+body {
+  @apply bg-[rgba(12,10,29,1.0)];
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-purple-500 to-orange-600 bg-clip-text text-transparent;
+}
+
+.text-glow {
+  @apply shadow-red-300 drop-shadow-lg;
+}
+
+.wrapper {
+  @apply px-4 pt-8 md:px-10 md:pt-12 lg:px-14 lg:pt-16 xl:px-16;
+}
