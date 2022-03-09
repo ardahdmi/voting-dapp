@@ -7,18 +7,25 @@ export const Hero = () => {
   const [open, setOpen] = useState<boolean>(false);
   const toggleOpen = () => setOpen((open) => !open);
   return (
-    <section className="wrapper mt-24 flex h-screen w-screen flex-col items-center justify-start text-center">
-      <h1 className="drop-shadow-glow max-w-sm text-5xl font-semibold text-white/90 lg:text-6xl">
+    <section className="wrapper flex h-screen w-screen flex-col items-center justify-start text-center">
+      <h1 className="drop-shadow-glow mt-24 max-w-sm text-5xl font-semibold text-white/90 lg:text-6xl">
         Straightforward <span className="gradient-text">voting</span> dApp.
       </h1>
 
       <div className="mx-auto mt-8 w-full max-w-xl">
-        {!open && (
+        <Button
+          onClick={toggleOpen}
+          text="Register"
+          className={open ? "invisible" : "visible"}
+        />
+        {open && (
           <>
             <RegistrationForm />
+            <button onClick={toggleOpen} className="font-bold text-orange-500">
+              Cancel
+            </button>
           </>
         )}
-        <Button onClick={toggleOpen} text={open ? "Register" : "Cancel"} />
       </div>
     </section>
   );
