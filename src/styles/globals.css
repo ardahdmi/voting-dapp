@@ -13,7 +13,7 @@ span {
 
 html,
 body {
-  @apply bg-[rgba(12,10,29,1.0)];
+  @apply bg-background;
 }
 
 .gradient-text {
@@ -30,4 +30,13 @@ body {
 
 .btn-primary {
   @apply shadow-btn-glow rounded-xl bg-orange-500 px-12 py-[10px] transition-colors duration-200 hover:bg-orange-600;
+}
+
+.input-field {
+  @apply w-full border-b bg-transparent px-3 py-2 outline-none md:px-4;
+  @apply font-spartan text-lg text-white/90 transition-colors duration-300 placeholder:text-white/90 focus:placeholder:text-transparent;
+}
+
+.submit-btn {
+  @apply rounded-sm bg-blue-400 px-10 py-1;
 }

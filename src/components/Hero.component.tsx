@@ -1,4 +1,6 @@
+import clsx from "clsx";
 import { useState } from "react";
+import { RegistrationForm } from "./forms/RegistrationForm.component";
 import { Button } from "./shared/Button.component";
 
 export const Hero = () => {
@@ -9,8 +11,15 @@ export const Hero = () => {
       <h1 className="drop-shadow-glow max-w-sm text-5xl font-semibold text-white/90 lg:text-6xl">
         Straightforward <span className="gradient-text">voting</span> dApp.
       </h1>
-      <Button onClick={toggleOpen} text="Register" />
-      {open && <p className="">arda</p>}
+
+      <div className="mx-auto mt-8 w-full max-w-xl">
+        {!open && (
+          <>
+            <RegistrationForm />
+          </>
+        )}
+        <Button onClick={toggleOpen} text={open ? "Register" : "Cancel"} />
+      </div>
     </section>
   );
 };

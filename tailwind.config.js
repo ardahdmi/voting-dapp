@@ -5,6 +5,9 @@ module.exports = {
       spartan: ['"League Spartan"', "ui-sans-serif", "system-ui"],
     },
     extend: {
+      colors: {
+        background: "rgba(12, 10, 29, 1.0)",
+      },
       dropShadow: {
         glow: [
           "0 0 50px rgb(192, 219, 255, 0.55)",
