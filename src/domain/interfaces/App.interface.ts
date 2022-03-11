@@ -15,3 +15,14 @@ export interface InputCheckboxProps {
   name: string;
   label: string;
 }
+
+export interface UserFormFieldProps {
+  nickname: string;
+  isVoter: boolean;
+  isQuestioner: boolean;
+}
+
+export interface HeaderItemProps {
+  to: string;
+  text: string;
+}

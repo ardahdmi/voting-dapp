@@ -1,14 +1,13 @@
-import clsx from "clsx";
 import { useState } from "react";
-import { RegistrationForm } from "./forms/RegistrationForm.component";
-import { Button } from "./shared/Button.component";
+import { RegistrationForm } from "../forms/RegistrationForm.component";
+import { Button } from "../shared/Button.component";
 
-export const Hero = () => {
+export const HomePage = () => {
   const [open, setOpen] = useState<boolean>(false);
   const toggleOpen = () => setOpen((open) => !open);
   return (
-    <section className="wrapper flex h-screen w-screen flex-col items-center justify-start text-center">
-      <h1 className="drop-shadow-glow mt-24 max-w-sm text-5xl font-semibold text-white/90 lg:text-6xl">
+    <section className="wrapper flex w-screen flex-col items-center justify-start text-center">
+      <h1 className="drop-shadow-glow max-w-sm text-5xl font-semibold text-white/90 lg:text-6xl">
         Straightforward <span className="gradient-text">voting</span> dApp.
       </h1>
 
