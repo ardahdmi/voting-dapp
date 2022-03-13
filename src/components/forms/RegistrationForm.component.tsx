@@ -1,9 +1,11 @@
 import clsx from "clsx";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { InputError } from "../shared/InputError.component";
 import { InputCheckbox } from "../shared/InputCheckbox.component";
-import { UserFormFieldProps } from "../../domain/interfaces";
+import { CustomErrorTypes, UserFormFieldProps } from "../../domain/interfaces";
 import { usePollContract } from "../../hooks/usePollContract";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const RegistrationForm = () => {
   const {
@@ -11,30 +13,49 @@ export const RegistrationForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<UserFormFieldProps>();
-  const { addUser, allUsers } = usePollContract();
+  const { addUser, isNewUser } = usePollContract();
+  const [customError, setCustomError] = useState<CustomErrorTypes>();
+  let navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<UserFormFieldProps> = ({
+  const onSubmit: SubmitHandler<UserFormFieldProps> = async ({
     nickname,
     isVoter,
     isQuestioner,
   }) => {
-    addUser({ nickname, isVoter, isQuestioner });
-    console.log(allUsers);
+    const newUser = await isNewUser();
+    console.log("existingUser", newUser);
+
+    if (newUser) {
+      addUser({ nickname, isVoter, isQuestioner });
+      // wait metamask confirm
+      // navigate("../dashboard", { replace: true });
+    } else {
+      console.log("user already exists");
+      setCustomError("registered");
+      setTimeout(() => setCustomError("none"), 3000);
+    }
   };
 
   return (
-    <form className="flex flex-col gap-y-2" onSubmit={handleSubmit(onSubmit)}>
-      <h1>there are {allUsers.length}</h1>
+    <form
+      className="relative flex flex-col gap-y-4"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <input
         placeholder="Please select a nickname."
         className={clsx(
           "input-field",
           errors.nickname ? "border-red-400" : "border-white/90"
         )}
-        {...register("nickname", { required: true })}
+        {...register("nickname", {
+          required: true,
+          maxLength: 15,
+          minLength: 3,
+        })}
       />
-      <InputError className={errors.nickname ? "visible" : "invisible"} />
-      <div className="mt-4 flex flex-col items-start gap-y-6 lg:mt-6">
+
+      <InputError customError={customError} type={errors.nickname?.type} />
+      <div className="mt-10 flex flex-col items-start gap-y-6">
         <InputCheckbox
           {...{
             register,
@@ -50,9 +71,8 @@ export const RegistrationForm = () => {
           }}
         />
       </div>
-
       <input
-        className="submit-btn my-6 self-center lg:my-10"
+        className="submit-btn my-6 self-center "
         type="submit"
         value="Let's go!"
       />
