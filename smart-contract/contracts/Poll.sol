@@ -9,6 +9,8 @@ contract Poll {
     // Quiz(title, ownerAddress, s[] questions, m(s=>s[]) answers, bool exists, bool isOpen)
     // Vote(vAddress, qAddress, questions, s[] choices)
 
+    event NewUser(address indexed user, uint256 date, string message);
+
     address public immutable OWNER;
 
     address[] quizList;
@@ -25,19 +27,24 @@ contract Poll {
 
     function addUser(
         string memory _nickname,
+        address _userAddress,
         bool _isVoter,
         bool _isQuestioner
-    ) public {
-        require(bytes(_nickname).length > 0, "Please specify a nickname.");
+    ) public suitableToRegister(_nickname) {
         // ayni isimle olmaz
-        users[msg.sender] = User(
+        users[_userAddress] = User(
             _nickname,
-            msg.sender,
+            _userAddress,
             _isVoter,
             _isQuestioner,
             true
         );
-        userList.push(msg.sender);
+        userList.push(_userAddress);
+        emit NewUser(
+            _userAddress,
+            block.timestamp,
+            "User successfully created."
+        );
     }
 
     function getAllUsers() public view returns (User[] memory) {
@@ -102,11 +109,12 @@ contract Poll {
         // emit
     }
 
-    function endQuizWithResults() public isApproved returns (Quiz memory) {
+    function endQuizWithResults() public isApproved returns (Vote[] memory) {
         require(quizes[msg.sender].exists == true, "User doesn't own a quiz.");
         quizes[msg.sender].isOpen = false;
         // emit
-        return quizes[msg.sender];
+
+        return getVotesForQuiz(msg.sender);
     }
 
     function getVotesForQuiz(address _quizAddress)
@@ -128,6 +136,19 @@ contract Poll {
             keccak256(abi.encodePacked(tSecond));
     }
 
+    function isNewUser(address _address) public view returns (bool) {
+        return users[_address].userAddress == address(0x0);
+    }
+
+    modifier suitableToRegister(string memory _nickname) {
+        require(bytes(_nickname).length > 0, "Please specify a nickname.");
+        require(
+            bytes(_nickname).length >= 3 && bytes(_nickname).length <= 15,
+            "A valid nickname should have 3-15 characters."
+        );
+        _;
+    }
+
     modifier suitableToVote(Vote memory _vote) {
         require(
             users[_vote.voterAddress].isVoter == true,
@@ -140,6 +161,10 @@ contract Poll {
         require(
             _vote.voterAddress != _vote.quizAddress,
             "Quiz owner can't vote."
+        );
+        require(
+            quizes[_vote.quizAddress].isOpen == true,
+            "The poll has been closed."
         );
         _;
     }
