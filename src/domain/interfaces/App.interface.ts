@@ -1,4 +1,10 @@
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldValues, LiteralUnion, UseFormRegister } from "react-hook-form";
+import { UserStruct } from "./PollContract.interface";
+
+export interface ISectionTitle {
+  text: string;
+  className?: any;
+}
 
 export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -6,8 +12,30 @@ export interface ButtonProps {
   className?: any;
 }
 
+export type CustomErrorTypes = "registered" | "none";
+
 export interface InputErrorProps {
-  className?: any;
+  customError: CustomErrorTypes | undefined;
+  className?: string;
+  type: LiteralUnion<
+    | "required"
+    | "maxLength"
+    | "minLength"
+    | "pattern"
+    | "onBlur"
+    | "onChange"
+    | "value"
+    | "min"
+    | "max"
+    | "validate"
+    | "valueAsNumber"
+    | "valueAsDate"
+    | "setValueAs"
+    | "shouldUnregister"
+    | "disabled"
+    | "deps",
+    string
+  >;
 }
 
 export interface InputCheckboxProps {
@@ -25,4 +53,20 @@ export interface UserFormFieldProps {
 export interface HeaderItemProps {
   to: string;
   text: string;
+}
+
+export interface CardTagProps {
+  icon?: JSX.Element;
+  text: string;
+  className?: string;
+}
+
+export interface SingleUserCardProps {
+  user: UserStruct;
+  number: number;
+}
+
+export interface UserInfoTagProps {
+  isVoter: boolean;
+  isQuestioner: boolean;
 }

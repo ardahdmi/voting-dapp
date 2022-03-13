@@ -1,15 +1,3 @@
-export interface IAddUser {
-  nickname: string;
-  isVoter: boolean;
-  isQuestioner: boolean;
-}
-
-export interface IAddQuiz {
-  title: string;
-  questions: string[];
-  answers: string[][];
-}
-
 export interface UserStruct {
   nickname: string;
   userAddress: string;
@@ -26,3 +14,17 @@ export interface QuizStruct {
   exists: boolean;
   isOpen: boolean;
 }
+
+export interface IAddChangeUser {
+  nickname: string;
+  isVoter: boolean;
+  isQuestioner: boolean;
+}
+
+export interface IAddQuiz {
+  title: string;
+  questions: string[];
+  answers: string[][];
+}
+
+export interface IVote {}
