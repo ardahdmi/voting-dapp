@@ -11,7 +11,7 @@ import {
 
 export const Header = () => {
   return (
-    <header className="wrapper flex items-center justify-between pt-5 md:pt-6 lg:items-start">
+    <header className="wrapper flex items-center justify-between pt-4 md:pt-6 lg:items-start">
       <Link to="/">
         <LogoIcon />
       </Link>
