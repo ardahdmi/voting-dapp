@@ -11,19 +11,19 @@ export const HomePage = () => {
         Straightforward <span className="gradient-text">voting</span> dApp.
       </h1>
 
-      <div className="mx-auto mt-8 w-full max-w-xl">
+      <div className="mx-auto mt-4 w-full max-w-xl">
         <Button
           onClick={toggleOpen}
           text="Register"
           className={open ? "invisible" : "visible"}
         />
         {open && (
-          <>
+          <div>
             <RegistrationForm />
             <button onClick={toggleOpen} className="font-bold text-orange-500">
               Cancel
             </button>
-          </>
+          </div>
         )}
       </div>
     </section>
