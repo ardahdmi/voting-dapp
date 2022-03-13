@@ -16,6 +16,10 @@ module.exports = {
       },
       boxShadow: {
         "btn-glow": ["0px 0px 22px 12px rgba(249, 115, 22, 0.16)"],
+        dashboard: [
+          "0px 6px 12px -2px rgba(50, 50, 93, 0.25)",
+          "0px 3px 10px -1px rgba(0, 0, 0, 0.3)",
+        ],
       },
     },
   },

@@ -31,6 +31,7 @@
     "react-hook-form": "^7.27.1",
     "react-router-dom": "^6.2.2",
     "solidity-coverage": "^0.7.20",
+    "swiper": "^8.0.7",
     "ts-node": "^10.5.0",
     "typechain": "^7.0.0"
   },
