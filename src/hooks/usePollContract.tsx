@@ -1,18 +1,18 @@
-declare const window: { ethereum: any };
-
 import { contractABI, contractAddress } from "../utils/constants";
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  IAddChangeUser,
   IAddQuiz,
-  IAddUser,
+  IVote,
   QuizStruct,
   UserStruct,
 } from "../domain/interfaces/PollContract.interface";
+declare const window: { ethereum: any };
 
 export const usePollContract = () => {
   const [currentAccount, setCurrentAccount] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
+
   const [allQuizes, setAllQuizes] = useState([]);
 
   const isWalletConnected = async () => {
@@ -24,8 +24,6 @@ export const usePollContract = () => {
         return;
       } else {
         console.log("We have the ethereum object", ethereum);
-        await getAllUsers();
-        await getAllQuizes();
       }
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
@@ -41,6 +39,10 @@ export const usePollContract = () => {
     }
   };
 
+  useEffect(() => {
+    isWalletConnected();
+  }, []);
+
   const getPollContract = async (
     isSigner: boolean = false
   ): Promise<ethers.Contract> => {
@@ -52,7 +54,7 @@ export const usePollContract = () => {
       : new ethers.Contract(contractAddress, contractABI, provider);
   };
 
-  const addUser = async (props: IAddUser): Promise<void> => {
+  const addUser = async (props: IAddChangeUser): Promise<void> => {
     const { ethereum } = window;
     const { nickname, isQuestioner, isVoter } = props;
     try {
@@ -62,6 +64,7 @@ export const usePollContract = () => {
 
         const addUserTxn = await pollContract.addUser(
           nickname,
+          "0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199",
           isVoter,
           isQuestioner
         );
@@ -78,7 +81,7 @@ export const usePollContract = () => {
     }
   };
 
-  const getAllUsers = async () => {
+  const isNewUser = async (): Promise<boolean> => {
     const { ethereum } = window;
 
     try {
@@ -86,16 +89,40 @@ export const usePollContract = () => {
         const pollContract = await getPollContract();
         await pollContract.deployed();
 
+        const condition = await pollContract.isNewUser(currentAccount);
+        return condition;
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllUsers = async () => {
+    const { ethereum } = window;
+
+    try {
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const pollContract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          provider
+        );
+        await pollContract.deployed();
+
         const users: UserStruct[] = await pollContract.getAllUsers();
-        console.log(users);
 
         const usersCleaned = users.map((user) => {
           return {
             nickname: user.nickname,
             userAddress: user.userAddress,
+            isVoter: user.isVoter,
+            isQuestioner: user.isQuestioner,
+            isApproved: user.isApproved,
           };
         });
-        setAllUsers(usersCleaned);
         return usersCleaned;
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -120,7 +147,6 @@ export const usePollContract = () => {
         );
 
         await addUserTxn.wait();
-        await getAllQuizes();
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -158,14 +184,42 @@ export const usePollContract = () => {
     }
   };
 
-  const changeUserRole = async () => {};
-  const vote = async () => {};
+  const changeUserRole = async (props: IAddChangeUser) => {
+    const { ethereum } = window;
+    const { nickname, isVoter, isQuestioner } = props;
+    try {
+      if (ethereum) {
+        const pollContract = await getPollContract(true);
+        await pollContract.deployed();
+
+        const addUserTxn = await pollContract.changeUserRole(
+          nickname,
+          isVoter,
+          isQuestioner
+        );
+
+        await addUserTxn.wait();
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const vote = async (props: IVote) => {
+    const {} = props;
+  };
   const endQuizWithResults = async () => {};
 
   //todo sebebini anlamadim
-  useEffect(() => {
-    isWalletConnected();
-  }, []);
 
-  return { addUser, allUsers, isWalletConnected, addQuiz, allQuizes };
+  return {
+    addUser,
+    getAllUsers,
+    isWalletConnected,
+    addQuiz,
+    changeUserRole,
+    isNewUser,
+  };
 };
