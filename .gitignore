@@ -44,3 +44,5 @@ typechain
 cache
 artifacts
 /typechain-types
+
+/src/public/styles
