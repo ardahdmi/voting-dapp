@@ -13,6 +13,8 @@ import {
 
 import "swiper/css";
 import { useEffect, useState } from "react";
+import { UsersIcon } from "../../public/icons/Users.icon";
+import { DashboardItemTitle } from "../shared/DashboardItemTitle.component";
 
 export const UsersCard = () => {
   const [allUsers, setAllUsers] = useState<UserStruct[] | undefined>([]);
@@ -31,7 +33,8 @@ export const UsersCard = () => {
   // getAllUsers
 
   return (
-    <div className="flex h-full w-full flex-col justify-start px-2 md:px-6">
+    <div className="relative flex h-full w-full flex-col justify-start px-2 md:px-6">
+      <DashboardItemTitle icon={<UsersIcon />} sectionName="users" />
       <div className="relative flex h-full w-full flex-col gap-y-4 overflow-x-hidden overflow-y-scroll pt-3">
         {allUsers && (
           <Swiper
