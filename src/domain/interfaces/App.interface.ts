@@ -14,6 +14,12 @@ export interface ButtonProps {
 
 export type CustomErrorTypes = "registered" | "none";
 
+export type DashboardSectionType = "quizes" | "users";
+
+export interface DashboardItemTitleProps {
+  icon: JSX.Element;
+  sectionName: DashboardSectionType;
+}
 export interface InputErrorProps {
   customError: CustomErrorTypes | undefined;
   className?: string;
