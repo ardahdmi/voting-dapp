@@ -15,5 +15,5 @@ export const AddQuizDisclosure: React.FC = ({ children }) => {
 };
 
 const DisclosureButton: React.FC<ButtonProps> = ({ text, className }) => (
-  <Disclosure.Button>{text}</Disclosure.Button>
+  <Disclosure.Button className="text-white">{text}</Disclosure.Button>
 );

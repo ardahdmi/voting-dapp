@@ -5,7 +5,9 @@ export const QuizesCard = () => {
   return (
     <div className="relative flex h-full flex-col px-2 md:px-6">
       <SectionTitle text="All quizes" />
-      <AddQuizDisclosure>arda</AddQuizDisclosure>
+      <AddQuizDisclosure>
+        <p className="text-white">arda</p>
+      </AddQuizDisclosure>
     </div>
   );
 };
