@@ -33,7 +33,7 @@ export default IndexPage;
 // user already exists erroru aynen
 
 // todo grid yer ac contact form
-// todo same username issue
+// todo wait metamask confirm
 // todo grid item lerin section style paddinglere dikkat after: ile sag uste tooltip gibi
 // todo quiz card style
 // todo contract hook bitir
@@ -41,4 +41,3 @@ export default IndexPage;
 // todo animation
 // todo checkbox icine svg
 // todo usercard ui improve
-// todo wait metamask confirm

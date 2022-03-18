@@ -31,20 +31,22 @@ export const UsersCard = () => {
   // getAllUsers
 
   return (
-    <div className="flex h-full w-full flex-col justify-start">
+    <div className="flex h-full w-full flex-col justify-start px-2 md:px-6">
       <div className="relative flex h-full w-full flex-col gap-y-4 overflow-x-hidden overflow-y-scroll pt-3">
-        <Swiper
-          direction="vertical"
-          slidesPerView={3}
-          className="h-full w-full"
-        >
-          {allUsers.map((user, idx) => (
-            <SwiperSlide key={idx}>
-              <SingleUserCard number={idx} user={user} />
-            </SwiperSlide>
-          ))}
-          {allUsers.length > 3 && <Navigation />}
-        </Swiper>
+        {allUsers && (
+          <Swiper
+            direction="vertical"
+            slidesPerView={3}
+            className="h-full w-full"
+          >
+            {allUsers.map((user, idx) => (
+              <SwiperSlide key={idx}>
+                <SingleUserCard number={idx} user={user} />
+              </SwiperSlide>
+            ))}
+            {allUsers.length > 3 && <Navigation />}
+          </Swiper>
+        )}
       </div>
     </div>
   );
@@ -54,11 +56,11 @@ const SingleUserCard: React.FC<SingleUserCardProps> = ({ number, user }) => {
   const borderColor = getRandomBorderColor(number);
   const { nickname, isVoter, isQuestioner } = user;
   return (
-    <div className="mr-6 flex h-16 select-none items-center justify-between overflow-hidden rounded-lg bg-stone-800 p-2 lg:h-14 xl:h-16">
+    <div className="bg-primary-600 flex h-16 select-none items-center justify-between overflow-hidden rounded-lg p-2 shadow-md lg:h-14 xl:h-16">
       <div className="flex items-center gap-x-[10px]">
         <div
           className={clsx(
-            "flex rounded-full border-[2px] shadow-lg",
+            "flex w-10 rounded-full border-[2px] shadow-lg",
             borderColor
           )}
         >

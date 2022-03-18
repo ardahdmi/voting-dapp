@@ -7,6 +7,12 @@ module.exports = {
     extend: {
       colors: {
         background: "rgba(12, 10, 29, 1.0)",
+        primary: {
+          600: "#121419",
+          700: "#0f1014",
+          800: "#0A0A11",
+          900: "#0C0C14",
+        },
       },
       dropShadow: {
         glow: [
