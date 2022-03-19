@@ -1,13 +1,13 @@
 import { Disclosure, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import { ButtonProps } from "../../../domain/interfaces";
+import { DisclosureButtonProps } from "../../../domain/interfaces";
 
 export const AddPollDisclosure: React.FC = ({ children }) => {
   return (
-    <Disclosure>
+    <Disclosure as="div" className="">
       {({ open }) => (
         <>
-          <DisclosureButton text="create new" />
+          <DisclosureButton text="create new" type="on" />
           <Transition
             as={Fragment}
             show={open}
@@ -29,17 +29,21 @@ export const AddPollDisclosure: React.FC = ({ children }) => {
   );
 };
 
-const DisclosureButton: React.FC<ButtonProps> = ({
+const DisclosureButton: React.FC<DisclosureButtonProps> = ({
   text,
   className,
   onClick,
-  disabled,
-}) => (
-  <Disclosure.Button
-    disabled={disabled}
-    onClick={onClick}
-    className="text-white"
-  >
-    {text}
-  </Disclosure.Button>
-);
+  type = "off",
+}) => {
+  return (
+    <Disclosure.Button
+      onClick={onClick}
+      className="font-spartan text-lg font-medium text-orange-400 transition-colors hover:text-red-400"
+    >
+      {text}
+    </Disclosure.Button>
+  );
+};
+
+// some button
+// mx-4 mb-4 rounded-lg bg-indigo-500 bg-opacity-50 px-12 py-2 text-white transition-opacity duration-200 hover:bg-opacity-70 sm:mb-6 sm:self-center lg:mb-8

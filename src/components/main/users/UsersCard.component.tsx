@@ -33,7 +33,7 @@ export const UsersCard = () => {
   // getAllUsers
 
   return (
-    <div className="relative flex h-full w-full flex-col justify-start px-2 md:px-6">
+    <div className="dashboard-item-wrapper justify-start">
       <DashboardItemTitle icon={<UsersIcon />} sectionName="users" />
       <div className="relative flex h-full w-full flex-col gap-y-4 overflow-x-hidden overflow-y-scroll pt-3">
         {allUsers && (

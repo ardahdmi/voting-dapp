@@ -13,6 +13,10 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
+export interface DisclosureButtonProps extends ButtonProps {
+  type?: "on" | "off";
+}
+
 export type CustomErrorTypes = "registered" | "none";
 
 export type DashboardSectionType = "quizes" | "users";

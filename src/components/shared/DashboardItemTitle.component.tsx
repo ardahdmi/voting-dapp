@@ -19,12 +19,15 @@ export const DashboardItemTitle: React.FC<DashboardItemTitleProps> = ({
 
   return (
     <div
-      className={clsx(
-        "card-title absolute right-1 top-1 rounded-lg bg-white/20 p-1 opacity-60 shadow-lg",
-        getSectionColorTheme(sectionName)
-      )}
+      className={clsx("card-title w-full", getSectionColorTheme(sectionName))}
     >
-      {icon}
+      <div
+        className={clsx(
+          "absolute right-[6px] top-[6px] rounded-lg bg-white/20 p-1 opacity-60 shadow-lg md:right-1 md:top-1"
+        )}
+      >
+        {icon}
+      </div>
     </div>
   );
 };
