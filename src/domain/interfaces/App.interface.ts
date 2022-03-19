@@ -10,6 +10,7 @@ export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   text: string;
   className?: any;
+  disabled?: boolean;
 }
 
 export type CustomErrorTypes = "registered" | "none";

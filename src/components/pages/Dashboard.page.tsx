@@ -1,8 +1,8 @@
 declare const window: { ethereum: any };
 
 import { ContactForm } from "../forms/ContactForm.component";
-import { QuizesCard } from "../main/QuizesCard.component";
-import { UsersCard } from "../main/UsersCard.component";
+import { QuizesCard } from "../main/polls/QuizesCard.component";
+import { UsersCard } from "../main/users/UsersCard.component";
 
 export const DashboardPage = () => {
   return (

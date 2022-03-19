@@ -1,20 +1,20 @@
 import Image from "next/image";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-import { usePollContract } from "../../hooks/usePollContract";
-import { getAvatarForUser, getRandomBorderColor } from "../../utils/helpers";
-import { QuestionIcon, VoteIcon } from "../../public/icons";
-import { CardTag } from "../shared/Text";
+import { usePollContract } from "../../../hooks/usePollContract";
+import { getAvatarForUser, getRandomBorderColor } from "../../../utils/helpers";
+import { QuestionIcon, VoteIcon } from "../../../public/icons";
+import { CardTag } from "../../shared/Text";
 import clsx from "clsx";
 import {
   SingleUserCardProps,
   UserInfoTagProps,
   UserStruct,
-} from "../../domain/interfaces";
+} from "../../../domain/interfaces";
 
 import "swiper/css";
 import { useEffect, useState } from "react";
-import { UsersIcon } from "../../public/icons/Users.icon";
-import { DashboardItemTitle } from "../shared/DashboardItemTitle.component";
+import { UsersIcon } from "../../../public/icons/Users.icon";
+import { DashboardItemTitle } from "../../shared/DashboardItemTitle.component";
 
 export const UsersCard = () => {
   const [allUsers, setAllUsers] = useState<UserStruct[] | undefined>([]);
