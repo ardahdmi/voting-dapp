@@ -8,7 +8,7 @@ export interface UserStruct {
 
 export interface QuizStruct {
   title: string;
-  ownerAddress: string;
+  ownerAddress?: string;
   questions: string[];
   answers: string[][];
   exists: boolean;
