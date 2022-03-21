@@ -1,4 +1,5 @@
 import { Disclosure, Transition } from "@headlessui/react";
+import clsx from "clsx";
 import React, { Fragment } from "react";
 import { DisclosureButtonProps } from "../../../domain/interfaces";
 
@@ -7,7 +8,10 @@ export const AddPollDisclosure: React.FC = ({ children }) => {
     <Disclosure as="div" className="">
       {({ open }) => (
         <>
-          <DisclosureButton text="create new" type="on" />
+          <span className="font-spartan flex gap-x-1 text-lg font-normal">
+            <p>Ready to ask questions?</p>
+            <DisclosureButton text="create new" type="on" />
+          </span>
           <Transition
             as={Fragment}
             show={open}
@@ -18,9 +22,12 @@ export const AddPollDisclosure: React.FC = ({ children }) => {
             leaveFrom="opacity-100 "
             leaveTo="opacity-0"
           >
-            <Disclosure.Panel className="bg-primary-900 absolute inset-0 flex flex-col rounded-lg bg-opacity-80 text-gray-500 backdrop-blur-md">
+            <Disclosure.Panel className="disclosure-panel bg-red-300">
               {children}
-              <DisclosureButton text="cancel" />
+              <span className="font-spartan mx-auto flex gap-x-1 text-lg font-normal">
+                <p>Still not sure?</p>
+                <DisclosureButton text="cancel quiz" type="off" />
+              </span>
             </Disclosure.Panel>
           </Transition>
         </>
@@ -31,14 +38,14 @@ export const AddPollDisclosure: React.FC = ({ children }) => {
 
 const DisclosureButton: React.FC<DisclosureButtonProps> = ({
   text,
-  className,
-  onClick,
   type = "off",
 }) => {
   return (
     <Disclosure.Button
-      onClick={onClick}
-      className="font-spartan text-lg font-medium text-orange-400 transition-colors hover:text-red-400"
+      className={clsx(
+        "font-medium text-orange-400 underline underline-offset-1 transition-colors",
+        type === "off" ? "hover:text-red-400" : "hover:text-[#C3E5AE]"
+      )}
     >
       {text}
     </Disclosure.Button>

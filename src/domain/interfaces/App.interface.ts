@@ -1,5 +1,13 @@
-import { FieldValues, LiteralUnion, UseFormRegister } from "react-hook-form";
-import { UserStruct } from "./PollContract.interface";
+import React from "react";
+import {
+  Control,
+  FieldValues,
+  LiteralUnion,
+  UseFormRegister,
+  UseFormReset,
+  UseFormWatch,
+} from "react-hook-form";
+import { QuizStruct, UserStruct } from "./PollContract.interface";
 
 export interface ISectionTitle {
   text: string;
@@ -28,31 +36,38 @@ export interface DashboardItemTitleProps {
 export interface InputErrorProps {
   customError: CustomErrorTypes | undefined;
   className?: string;
-  type: LiteralUnion<
-    | "required"
-    | "maxLength"
-    | "minLength"
-    | "pattern"
-    | "onBlur"
-    | "onChange"
-    | "value"
-    | "min"
-    | "max"
-    | "validate"
-    | "valueAsNumber"
-    | "valueAsDate"
-    | "setValueAs"
-    | "shouldUnregister"
-    | "disabled"
-    | "deps",
-    string
-  >;
+  type:
+    | LiteralUnion<
+        | "required"
+        | "maxLength"
+        | "minLength"
+        | "pattern"
+        | "onBlur"
+        | "onChange"
+        | "value"
+        | "min"
+        | "max"
+        | "validate"
+        | "valueAsNumber"
+        | "valueAsDate"
+        | "setValueAs"
+        | "shouldUnregister"
+        | "disabled"
+        | "deps",
+        string
+      >
+    | undefined;
 }
 
 export interface InputCheckboxProps {
   register: UseFormRegister<FieldValues>;
   name: string;
   label: string;
+}
+
+export interface SingleQuestionFormProps {
+  setPollQuestions: React.Dispatch<React.SetStateAction<QuizStruct[]>>;
+  index: number;
 }
 
 export interface UserFormFieldProps {
