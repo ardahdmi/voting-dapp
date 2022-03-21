@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RegistrationForm } from "../forms/RegistrationForm.component";
+import { RegistrationForm } from "../forms/Registration.form";
 import { Button } from "../shared/Button.component";
 
 export const HomePage = () => {

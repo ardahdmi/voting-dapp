@@ -1,6 +1,6 @@
 declare const window: { ethereum: any };
 
-import { ContactForm } from "../forms/ContactForm.component";
+import { ContactForm } from "../forms/Contact.form";
 import { PollsCard } from "../main/polls/PollsCard.component";
 import { UsersCard } from "../main/users/UsersCard.component";
 
