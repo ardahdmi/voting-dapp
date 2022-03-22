@@ -6,7 +6,7 @@ import { SingleQuestionForm } from "../../forms/SingleQuestion.form";
 
 export const PollRegistrationCard = () => {
   const methods = useForm({
-    defaultValues: { title: "", qFields: [{ question: "" }] },
+    defaultValues: { title: "", qFields: [{ question: "", answers: "" }] },
   });
   const [pollQuestions, setPollQuestions] = useState<QuizStruct[]>([]);
 

@@ -59,6 +59,10 @@ export interface InputErrorProps {
     | undefined;
 }
 
+export interface SingleInputFieldProps {
+  fieldName: string;
+}
+
 export interface InputCheckboxProps {
   register: UseFormRegister<FieldValues>;
   name: string;
