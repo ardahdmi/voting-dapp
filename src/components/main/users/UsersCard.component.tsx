@@ -87,7 +87,6 @@ const SingleUserCard: React.FC<SingleUserCardProps> = ({ number, user }) => {
 
 const Navigation = () => {
   const swiper = useSwiper();
-  console.log(swiper.isBeginning);
 
   return (
     <div className="absolute right-[6px] top-0 bottom-0 z-10 flex w-4 flex-col justify-center gap-y-6">

@@ -25,7 +25,7 @@ export const AddPollDisclosure: React.FC = ({ children }) => {
             <Disclosure.Panel className="disclosure-panel bg-red-300">
               {children}
               <span className="font-spartan mx-auto flex gap-x-1 text-lg font-normal">
-                <p>Still not sure?</p>
+                <p className="text-gray-500">Still not sure?</p>
                 <DisclosureButton text="cancel quiz" type="off" />
               </span>
             </Disclosure.Panel>

@@ -12,7 +12,7 @@ export const PollsCard = () => {
         <AddPollDisclosure>
           <PollRegistrationCard />
         </AddPollDisclosure>
-        <div className="row-span-2 ">a</div>
+        <div className="row-span-2">a</div>
       </div>
     </div>
   );

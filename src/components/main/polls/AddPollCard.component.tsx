@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { QuizStruct } from "../../../domain/interfaces";
+import { formContent } from "../../../public/content/form.content";
+import { TitleIcon } from "../../../public/icons/Title.icon";
 import { SingleQuestionForm } from "../../forms/SingleQuestion.form";
 
 export const PollRegistrationCard = () => {
@@ -19,24 +21,28 @@ export const PollRegistrationCard = () => {
   return (
     <FormProvider {...methods}>
       <form
-        className="in-section-wrapper mx-auto w-full max-w-lg"
+        className="in-section-wrapper relative mx-auto h-full w-full max-w-lg"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
-        <div className="flex justify-center gap-x-2">
-          <label htmlFor="title">Please enter a title:</label>
+        <div className="group relative flex w-full items-center gap-x-1">
+          <label className="absolute left-2 -top-[6px] max-w-[40px] text-gray-500 transition-colors group-focus-within:text-orange-600">
+            <TitleIcon />
+          </label>
           <input
-            type="text"
-            id="title"
             {...methods.register("title", {
               required: true,
               maxLength: 20,
               minLength: 3,
             })}
+            className="add-quiz-input !pl-[54px] placeholder:!text-base"
+            placeholder={formContent.title.placeholder}
           />
+          {methods.formState.errors.title && (
+            <span>This field is required</span>
+          )}
         </div>
-        {methods.formState.errors.title && <span>This field is required</span>}
 
-        <div className="bg-primary-400 mx-auto mt-6 flex w-10/12 flex-col gap-y-2 rounded-lg p-2 md:mt-8">
+        <div className="question-disclosure-wrapper">
           {[...Array(pollQuestions.length + 1).keys()].map((question, id) => {
             return (
               <SingleQuestionForm
@@ -46,6 +52,13 @@ export const PollRegistrationCard = () => {
               />
             );
           })}
+        </div>
+        <div className="absolute bottom-2 left-0 right-0 flex flex-col items-center">
+          <input
+            type="submit"
+            className="submit-btn flex self-center"
+            value="Add quiz"
+          />
         </div>
       </form>
     </FormProvider>

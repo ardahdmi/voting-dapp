@@ -17,7 +17,7 @@ export const SingleInputField: React.FC<SingleInputFieldProps> = ({
         </label>
         <input
           {...register(`${fieldName}.question` as const)}
-          placeholder={formContent[0].placeholder}
+          placeholder={formContent.questions[0].placeholder}
           className="add-quiz-input"
         />
       </div>
@@ -30,7 +30,7 @@ export const SingleInputField: React.FC<SingleInputFieldProps> = ({
               </label>
               <input
                 {...field}
-                placeholder={formContent[1].placeholder}
+                placeholder={formContent.questions[1].placeholder}
                 className="add-quiz-input"
               />
             </div>
@@ -38,8 +38,8 @@ export const SingleInputField: React.FC<SingleInputFieldProps> = ({
           name={`${fieldName}.answers` as const}
           control={control}
         />
-        <span className="self-start text-xs font-normal text-gray-600">
-          form content
+        <span className="self-start whitespace-pre-wrap text-xs font-normal leading-[8px] text-gray-600">
+          {formContent.description}
         </span>
       </div>
     </li>
