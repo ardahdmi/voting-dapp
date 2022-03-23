@@ -25,7 +25,7 @@ export const PollRegistrationCard = () => {
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <div className="group relative flex w-full items-center gap-x-1">
-          <label className="absolute left-2 -top-[6px] max-w-[40px] text-gray-500 transition-colors group-focus-within:text-orange-600">
+          <label className="absolute left-2 top-0 max-w-[40px] text-gray-500 transition-colors group-focus-within:text-orange-600">
             <TitleIcon />
           </label>
           <input

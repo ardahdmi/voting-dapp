@@ -77,5 +77,4 @@ export const SingleQuestionForm: React.FC<SingleQuestionFormProps> = ({
 };
 
 // todo form validation
-// todo duruma gore grid 2
-// todo !!!!!form submit button
+// todo form submit button

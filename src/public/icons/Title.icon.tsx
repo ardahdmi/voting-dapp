@@ -1,37 +1,41 @@
 export const TitleIcon = () => {
   return (
     <svg
-      width="36"
-      height="36"
-      viewBox="0 0 36 36"
-      fill="none"
       strokeWidth={0.5}
       stroke="currentColor"
+      width="31"
+      height="31"
+      viewBox="0 0 31 31"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M4.5 6V30"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        d="M3.875 5.16675V25.8334"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
-        d="M18.75 6V30"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        d="M16.146 5.16675V25.8334"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
-        d="M4.5 18H18.75"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        d="M3.875 15.5H16.1458"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
-        d="M25.6694 18L29.2499 14.2625V30"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        d="M22.1045 15.4999L25.1877 12.2815V25.8333"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
