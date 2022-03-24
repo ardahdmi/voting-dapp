@@ -61,6 +61,7 @@ export interface InputErrorProps {
 
 export interface SingleInputFieldProps {
   fieldName: string;
+  index: number;
 }
 
 export interface InputCheckboxProps {

@@ -1,6 +1,6 @@
 import { PollsIcon } from "../../../public/icons/Polls.icon";
 import { DashboardItemTitle } from "../../shared/DashboardItemTitle.component";
-import { PollRegistrationCard } from "./AddPollCard.component";
+import { PollRegistrationCard } from "./PollRegistrationCard.component";
 import { AddPollDisclosure } from "./AddPollDisclosure";
 
 export const PollsCard = () => {

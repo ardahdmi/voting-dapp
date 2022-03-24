@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -38,7 +39,14 @@ export const PollRegistrationCard = () => {
             placeholder={formContent.title.placeholder}
           />
           {methods.formState.errors.title && (
-            <span>This field is required</span>
+            <span
+              className={clsx(
+                "md:text-md absolute -bottom-5 text-xs text-red-400/80",
+                methods.formState.errors.title ? "visible" : "invisible"
+              )}
+            >
+              Please enter a title. (3-20 letters)
+            </span>
           )}
         </div>
 
@@ -56,7 +64,7 @@ export const PollRegistrationCard = () => {
         <div className="absolute bottom-2 left-0 right-0 flex flex-col items-center">
           <input
             type="submit"
-            className="submit-btn flex self-center"
+            className="quiz-submit-btn flex self-center"
             value="Add quiz"
           />
         </div>
